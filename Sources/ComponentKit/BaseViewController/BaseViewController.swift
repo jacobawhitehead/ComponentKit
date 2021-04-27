@@ -10,9 +10,9 @@ import ThemeKit
 import DeclarativeUIKit
 import Combine
 
-class BaseViewController: UIViewController {
+open class BaseViewController: UIViewController {
     
-    var cancellables = [AnyCancellable]()
+    public var cancellables = [AnyCancellable]()
     
     private var ctaBottomAnchor: NSLayoutConstraint?
 
@@ -22,17 +22,17 @@ class BaseViewController: UIViewController {
     /// Called when reached the bottom of the scroll view.
     /// Can happen when scroll view content size height less then scroll view frame height (called once)
     /// Or when content size more then frame's height and user scrolls down to bottom.
-    func bottomReachedAction() { }
+    open func bottomReachedAction() { }
 
     /// Defines spacing between content view subviews.
-    var contentSpacing: CGFloat = Theme.constant(for: .padding) {
+    public var contentSpacing: CGFloat = Theme.constant(for: .padding) {
         didSet {
             contentStackView.spacing = contentSpacing
         }
     }
 
     /// Defines edge margins for content view.
-    var contentViewLayoutMargins = NSDirectionalEdgeInsets(top: Theme.constant(for: .margin),
+    public var contentViewLayoutMargins = NSDirectionalEdgeInsets(top: Theme.constant(for: .margin),
                                                            leading: Theme.constant(for: .margin),
                                                            bottom: Theme.constant(for: .margin),
                                                            trailing: Theme.constant(for: .margin)) {
@@ -42,12 +42,12 @@ class BaseViewController: UIViewController {
     }
 
     /// Subviews which have been added via either `addArrangedSubview` or `addArrangedViewController` functions
-    var arrangedSubviews: [UIView] {
+    public var arrangedSubviews: [UIView] {
         return contentStackView.arrangedSubviews
     }
 
     /// Determines whether the view controller lays out its content relative to its safe area. Defaults to true.
-    var isSafeAreaRelativeLayout: Bool = true
+    public var isSafeAreaRelativeLayout: Bool = true
 
     // MARK: Private properties
 
@@ -80,7 +80,7 @@ class BaseViewController: UIViewController {
 
     private var scrollViewContentSizeObservation: NSKeyValueObservation?
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor(.backgroundPrimary)
         view.addSubview(mainStackView)
@@ -89,7 +89,7 @@ class BaseViewController: UIViewController {
         listenToKeyboard()
     }
     
-    func addCloseButton() {
+    private func addCloseButton() {
         navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .close, target: self, action: #selector(closeAction))
     }
     
@@ -101,7 +101,7 @@ class BaseViewController: UIViewController {
 
 // MARK: - Functions to add/remove subviews
 
-extension BaseViewController {
+public extension BaseViewController {
 
     /// Add multiple subviews inside the same vertical stack container
     func addArrangedSubviews(_ subviews: [UIView],
@@ -190,7 +190,7 @@ extension BaseViewController {
 
 // MARK: - Utilities
 
-extension BaseViewController {
+public extension BaseViewController {
 
     /// Applies custom spacing after the specified view.
     /// - Parameters:
@@ -257,7 +257,8 @@ extension BaseViewController {
 
 extension BaseViewController: UIScrollViewDelegate {
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         notifyScrolledToBottomIfNeeded(scrollView: scrollView)
     }
+    
 }
