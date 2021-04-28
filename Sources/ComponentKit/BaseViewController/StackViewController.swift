@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  StackViewController.swift
 //  
 //
 //  Created by Jacob Whitehead on 27/04/2021.
@@ -10,7 +10,7 @@ import ThemeKit
 import DeclarativeUIKit
 import Combine
 
-open class BaseViewController: UIViewController {
+open class StackViewController: UIViewController {
     
     public var cancellables = [AnyCancellable]()
     
@@ -101,7 +101,7 @@ open class BaseViewController: UIViewController {
 
 // MARK: - Functions to add/remove subviews
 
-public extension BaseViewController {
+public extension StackViewController {
 
     /// Add multiple subviews inside the same vertical stack container
     func addArrangedSubviews(_ subviews: [UIView],
@@ -190,7 +190,7 @@ public extension BaseViewController {
 
 // MARK: - Utilities
 
-public extension BaseViewController {
+public extension StackViewController {
 
     /// Applies custom spacing after the specified view.
     /// - Parameters:
@@ -203,7 +203,7 @@ public extension BaseViewController {
 
 // MARK: - Private helpers
 
-extension BaseViewController {
+extension StackViewController {
 
     private func startScrollViewBoundsObservation() {
         scrollViewContentSizeObservation = scrollView.observe(\.contentSize, options: .new) { [weak self] _, _ in
@@ -255,7 +255,7 @@ extension BaseViewController {
 
 // MARK: - UIScrollViewDelegate
 
-extension BaseViewController: UIScrollViewDelegate {
+extension StackViewController: UIScrollViewDelegate {
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         notifyScrolledToBottomIfNeeded(scrollView: scrollView)
