@@ -9,7 +9,7 @@ import UIKit
 import ThemeKit
 import DeclarativeUIKit
 
-class CheckListItem: UIView {
+public class CheckListItem: UIView {
     
     
     
